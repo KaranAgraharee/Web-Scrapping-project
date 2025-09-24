@@ -1,17 +1,19 @@
-import { Controller, Get, Post, Body } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { NavigationService } from './navigation.service';
+import { CreateNavigationDto } from './dto/create-navigation.dto';
+import { Navigation } from './schemas/navigation.schema';
 
 @Controller('navigation')
 export class NavigationController {
   constructor(private readonly navigationService: NavigationService) {}
 
   @Post()
-  create(@Body() dto: { title: string; slug: string }) {
+  async create(@Body() dto: CreateNavigationDto): Promise<Navigation> {
     return this.navigationService.create(dto);
   }
 
   @Get()
-  findAll() {
+  async findAll(): Promise<Navigation[]> {
     return this.navigationService.findAll();
   }
 }

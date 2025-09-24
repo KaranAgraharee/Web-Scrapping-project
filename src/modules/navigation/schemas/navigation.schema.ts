@@ -3,14 +3,11 @@ import { Document } from 'mongoose';
 
 @Schema({ timestamps: true })
 export class Navigation extends Document {
-  @Prop({ required: true, unique: true })
+  @Prop({ required: true })
   title: string;
 
-  @Prop({ required: true, unique: true })
-  slug: string;
-
-  @Prop({ default: Date.now })
-  lastScrapedAt: Date;
+  @Prop()
+  url: string;
 }
 
 export const NavigationSchema = SchemaFactory.createForClass(Navigation);
